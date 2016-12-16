@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class VivzHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="vivzdatabase";
     /*private static final String TABLE_NAME="VIVZTABLE";*/
-    private static final int DATABASE_VERSION=47;
+    private static final int DATABASE_VERSION=48;
 /*    private static final String UID="_Id";
     private static final String NAME="Name";*/
   /* private static final String ADD="Addess";*/
@@ -25,13 +25,10 @@ public class VivzHelper extends SQLiteOpenHelper {
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
         this.context=context;
         Message.message(context, "construtor called");
-     /*  hi();*/
+
     }
 
- /*   private void hi() {
-        SQLiteDatabase db=getWritableDatabase();
-        db.execSQL(DROP_TABLE);
-    }*/
+
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -40,7 +37,7 @@ public class VivzHelper extends SQLiteOpenHelper {
         try {
             Message.message(context, "onCreate called");
             sqLiteDatabase.execSQL(CREATE_TABLE);
-           /* Message.message(context, "onCreate called")*/;
+
         }catch (SQLException e){
             Message.message(context,""+e);
         }
@@ -50,14 +47,11 @@ public class VivzHelper extends SQLiteOpenHelper {
 
     public void insertdata(String name,String pass,SQLiteDatabase db){
 
-
-
         ContentValues contentValues=new ContentValues();
         contentValues.put(Contract.user.NAME,name);
         contentValues.put(Contract.user.PASS,pass);
         db.insert(Contract.user.TABLE_NAME,null,contentValues);
          Toast.makeText(context,"info added",Toast.LENGTH_SHORT).show();
-
 
     }
 
@@ -88,7 +82,7 @@ public class VivzHelper extends SQLiteOpenHelper {
             Message.message(context, "onUpgrade called");
            sqLiteDatabase.execSQL(DROP_TABLE);
             onCreate(sqLiteDatabase);
-        }catch (SQLException e){
+          }catch (SQLException e){
             Message.message(context,""+e);
         }
     }
@@ -120,6 +114,7 @@ public class VivzHelper extends SQLiteOpenHelper {
         String selectionargs[]={name1,pass1};
         Cursor cursor=sqLiteDatabase.query(Contract.user.TABLE_NAME, coloumns, Contract.user.NAME + " =? AND "+ Contract.user.PASS + " =? ",selectionargs,null,null,null,null);
         StringBuffer stringBuffer=new StringBuffer();
+
         while(cursor.moveToNext()){
 
             int index0=cursor.getColumnIndex(Contract.user.UID);
@@ -131,5 +126,26 @@ public class VivzHelper extends SQLiteOpenHelper {
 
 
 
+    }
+    public int updaterow(SQLiteDatabase db,String newname,String oldname)
+
+    {
+        //UPDATE VIVZTABLE SET 'vivz' WHERE NAME='TEST'
+        //SET 'vivz'-- this is new value to be set and can be done throw contentvalues
+        //WHERE     --this can be represnted using "Contract.user.NAME+" =? "
+        //oldvalue  --this is the olf value which is store insdie the String whereargs
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(Contract.user.NAME,newname);
+        String whereargs[]={oldname};
+        int count=db.update(Contract.user.TABLE_NAME,contentValues,Contract.user.NAME+" =? ",whereargs);
+        return count;
+
+    }
+     public int deletersome(SQLiteDatabase db,String oldname){
+     //DELETE * FROM VIVZTABLE WHERE NAME='vivz'
+
+         String whereargs[]={oldname};
+         int count=db.delete(Contract.user.TABLE_NAME,Contract.user.NAME+" =? ",whereargs);
+         return count;
     }
 }

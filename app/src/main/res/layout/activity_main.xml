@@ -11,27 +11,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="sarveshchavan777.database.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name" />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText" />
-
-    <TextView
-        android:text="Passowrd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+        android:id="@+id/editText"
+        android:hint="Name"
+        />
 
     <EditText
+        android:hint="Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText2" />
 
+   <LinearLayout
+       android:orientation="horizontal"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
     <Button
         android:text="login"
         android:layout_width="match_parent"
@@ -47,11 +43,13 @@
         android:id="@+id/button2"
         android:onClick="userdetails"
         />
+   </LinearLayout>
     <EditText
         android:layout_width="match_parent"
         android:hint="Enter the name whoes password u want"
         android:layout_height="wrap_content"
         android:id="@+id/editText3" />
+
     <Button
         android:text="Get Password"
         android:layout_width="match_parent"
@@ -60,7 +58,7 @@
         android:onClick="getpass"/>
     <EditText
         android:layout_width="match_parent"
-        android:hint="Enter the name and password whoes id you want"
+        android:hint="Enter name, password who's id u want"
         android:layout_height="wrap_content"
         android:id="@+id/editText4" />
     <Button
@@ -69,4 +67,29 @@
         android:layout_height="wrap_content"
         android:id="@+id/button4"
         android:onClick="getid"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="update:1st newname then oldname"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText5" />
+
+    <Button
+        android:text="Update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button5"
+        android:onClick="update"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="delete:name u wanna delete"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText6" />
+
+    <Button
+        android:text="Delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button6"
+        android:onClick="delete"/>
+
 </LinearLayout>
